@@ -20,36 +20,3 @@ function verifyTokenMw(req, res, next) {
 }
 
 module.exports = verifyTokenMw;
-
-// const { auth } = require('express-oauth2-jwt-bearer');
-
-// // Define the configuration for Auth0 JWT verification
-// const jwtCheckConfig = {
-//   audience: 'https://items-app-backend.onrender.com',
-//   issuerBaseURL: 'https://dev-qpd12wfu3va8x70r.eu.auth0.com/',
-//   tokenSigningAlg: 'RS256',
-// };
-
-// const verifyTokenMw = auth(jwtCheckConfig);
-
-// module.exports = verifyTokenMw;
-
-// const jwt = require('express-jwt');
-// const jwksRsa = require('jwks-rsa');
-
-// // Middleware function to verify Auth0 tokens
-// const verifyTokenMw = jwt({
-//   // Dynamically provide the signing key based on the key in the header and the signing keys provided by the JWKS endpoint.
-//   secret: jwksRsa.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: `https://dev-qpd12wfu3va8x70r.eu.auth0.com/.well-known/jwks.json`,
-//   }),
-//   // Validate the audience and the issuer.
-//   audience: 'https://items-app-backend.onrender.com',
-//   issuer: 'https://dev-qpd12wfu3va8x70r.eu.auth0.com/',
-//   algorithms: ['RS256'],
-// });
-
-// module.exports = verifyTokenMw;

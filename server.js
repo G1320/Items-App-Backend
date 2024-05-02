@@ -7,39 +7,24 @@ const collectionRoutes = require('./api/routes/collectionRoutes');
 const wishlistRoutes = require('./api/routes/wishlistRoutes');
 const itemRoutes = require('./api/routes/itemRoutes.js');
 const cartRoutes = require('./api/routes/cartRoutes');
-const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
-// const helmet = require('helmet');
+const helmet = require('helmet');
 const connectToDb = require('./db/mongoose');
 const express = require('express');
 
-const { expressjwt: jwt } = require('express-jwt');
-
-const jwks = require('jwks-rsa');
 const port = process.env.PORT || PORT;
 
 connectToDb();
 
 const app = express();
+app.use(helmet());
 
 const corsOptions = {
   origin: ALLOWED_ORIGINS,
   credentials: true,
 };
-
-const verifyJwt = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: 'https://dev-qpd12wfu3va8x70r.eu.auth0.com/.well-known/jwks.json',
-  }),
-  audience: 'https://items-app-backend.onrender.com',
-  issuer: 'https://dev-qpd12wfu3va8x70r.eu.auth0.com/',
-  algorithms: ['RS256'],
-});
 
 app.use(cors(corsOptions));
 
